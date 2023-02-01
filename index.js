@@ -3,12 +3,14 @@ const Manager = require("./lib/Manager");
 const Intern = require("./lib/Intern");
 const inquirer = require("inquirer");
 const fs = require("fs");
+const generateHTML = require("./generateHTML");
 const name = "name";
 const id = 3;
 const email = "mail";
 const gitHub = "that";
 const salary = "$$$";
 const school = "CGNU";
+let html = "index.html";
 const myEngineer = new Engineer(name, id, email, gitHub);
 const myManager = new Manager(name, id, email, salary);
 const myIntern = new Intern(name, id, email, school);
@@ -99,11 +101,15 @@ function init() {
       console.log(answers.intEmail);
       console.log(answers.intSchool);
       // fs.writeFile("index.html", generateMarkdown(answers));
-      fs.writeFile();
+      let result = generateHTML(answers);
+      fs.writeFile(html, result, (err) => {
+        if (err) {
+          console.log(err);
+        }
+      });
       // IF we need data from the prompt method continue our code inside of this functions scope
       // we can declare global variable and then update the value
       // we can PASS the variables/data to another function --> writeToFile("filename", data)
-      let result = generateMarkdown(answers);
 
       // we can write the rest of our code inbetween the { SCOPE }
     })

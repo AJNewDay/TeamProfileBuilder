@@ -4,19 +4,13 @@ const Intern = require("./lib/Intern");
 const inquirer = require("inquirer");
 const fs = require("fs");
 const generateHTML = require("./generateHTML");
-const name = "name";
-const id = 3;
-const email = "mail";
-const gitHub = "that";
-const salary = "$$$";
-const school = "CGNU";
+const name = "";
+const id = 0;
+const email = "";
+const gitHub = "";
+const salary = "";
+const school = "";
 let html = "index.html";
-const myEngineer = new Engineer(name, id, email, gitHub);
-const myManager = new Manager(name, id, email, salary);
-const myIntern = new Intern(name, id, email, school);
-console.log(myEngineer);
-console.log(myManager);
-console.log(myIntern);
 
 const questions = [
   {
@@ -100,8 +94,31 @@ function init() {
       console.log(answers.intId);
       console.log(answers.intEmail);
       console.log(answers.intSchool);
-      // fs.writeFile("index.html", generateMarkdown(answers));
-      let result = generateHTML(answers);
+      const myEngineer = new Engineer(
+        answers.engName,
+        answers.engId,
+        answers.engEmail,
+        answers.engGitHub
+      );
+      const myManager = new Manager(
+        answers.manName,
+        answers.manId,
+        answers.manEmail,
+        answers.manSalary
+      );
+      const myIntern = new Intern(
+        answers.intName,
+        answers.intId,
+        answers.intEmail,
+        answers.intSchool
+      );
+      const team = [];
+      team.push(myManager);
+      team.push(myEngineer);
+      team.push(myIntern);
+
+      // fs.writeFile("index.html", generateHTML(answers));
+      let result = generateHTML(team);
       fs.writeFile(html, result, (err) => {
         if (err) {
           console.log(err);
@@ -119,6 +136,5 @@ function init() {
 
   // console.log("I am content AFTER the async function");
 }
-
 // Function call to initialize app
 init();

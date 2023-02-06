@@ -1,33 +1,61 @@
 function generateHTML(team) {
   // TODO: loop over team members and make cards
-  for (i = 0; i < team.length; i++) {
-    console.log(team[i]);
-  }
+
   const manager = team.filter((employee) => employee.getRole() === "Manager");
-  return `# ${answers.title}
-  ## License:
-  ![license](https://img.shields.io/badge/license-${answers.license}-blue.svg)
 
+  const engineer = team.filter((employee) => employee.getRole() === "Engineer");
 
-  ## Table of Contents
-  - [Usage](#usage)
-  - [Installation](#installation)
-  - [Issues](#issues)
-  - [Contributions](#contributions)
-  - [License](#license)
- 
-## Usage
-${answers.usage}
-## Installation
-${answers.installation}
-## Issues
-${answers.issues}
-## Contributions
-${answers.contributions}
-## License
-${answers.license}
+  const intern = team.filter((employee) => employee.getRole() === "Intern");
+  const managerHtml = `
+  <div>
+  <h2>${manager[0].getRole()}</h2>
+  <h3>${manager[0].getName()}</h3>
+  <ul>
+  <li>${manager[0].getId()}</li>
+  <li>${manager[0].getEmail()}</li>
+  <li>${manager[0].getSalary()}</li>
+</ul>
+  </div>
+  `;
+  const engineerHtml = `
+  <div>
+  <h2>${engineer[0].getRole()}</h2>
+  <h3>${engineer[0].getName()}</h3>
+  <ul>
+  <li>${engineer[0].getId()}</li>
+  <li>${engineer[0].getEmail()}</li>
+  <li>${engineer[0].getGitHub()}</li>
+</ul>
+  </div>
+  `;
+  const internHtml = `
+  <div>
+  <h2>${intern[0].getRole()}</h2>
+  <h3>${intern[0].getName()}</h3>
+  <ul>
+  <li>${intern[0].getId()}</li>
+  <li>${intern[0].getEmail()}</li>
+  <li>${intern[0].getSchool()}</li>
+</ul>
+  </div>
+  `;
+  // }
+  return `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  ${managerHtml}
+  ${engineerHtml}
+  ${internHtml}
+</body>
+</html>
+
 `;
+  // this code EXPORTS the generateMarkdown function outside of this file
 }
-
-// this code EXPORTS the generateMarkdown function outside of this file
 module.exports = generateHTML;
